@@ -20,7 +20,7 @@ signed char getNumBits(unsigned long n) {
     if (n == 0) {
         return x;
     }
-    unsigned long compare = 1u;
+    unsigned long compare = 1;
     for (unsigned int i = 32; i > 0; i /= 2) {
         compare = (compare << i) - 1;
         if (n <= compare) {
