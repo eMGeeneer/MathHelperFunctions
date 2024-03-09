@@ -32,6 +32,9 @@ signed char getNumBits(unsigned long n) {
 
 // returns the greatest unsigned long less than a given unsigned long's square root 
 unsigned long fastIntSqrt(unsigned long n) {
+    if (n < 2) {
+        return n;
+    }
     unsigned long max = (getNumBits(n) + 1) / 2;
     unsigned long min = 1 << max - 1;
     max = 1 << max;
