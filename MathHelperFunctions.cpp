@@ -15,7 +15,7 @@ double* sqrt2(int x) {
 }
 
 // returns the number of bits occupied by a given unsigned long as a signed byte
-signed char getNumBits(unsigned long n) {
+signed char numBits(unsigned long n) {
     signed char x = 0;
     if (n == 0) {
         return x;
@@ -37,7 +37,7 @@ unsigned long fastIntSqrt(unsigned long n) {
     if (n < 2) {
         return n;
     }
-    unsigned long max = (getNumBits(n) + 1) / 2;
+    unsigned long max = (numBits(n) + 1) / 2;
     unsigned long min = 1 << max - 1;
     max = 1 << max;
     unsigned long x = (max + min) / 2;
