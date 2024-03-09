@@ -17,9 +17,7 @@ The lower bound can be determined to be greater than half of the upper bound, or
 This returns an estimation of the square root of 2 using a recursive formula along with the error bounds of the estimation.
 The error bounds are calculated by retrieving the next estimate, subtracting the requested estimate from it, and taking its absolute value.
 A proof for the formula follows.
-$N_n = 2N_{n - 1} + N_{n - 2} \quad N_0 = 1 \quad N_1 = 3 \\
-f(x) = \sum^\infty_{n = 0}N_nx^n \\
-= 1 + \sum^\infty_{n = 1}N_nx^n \\ 
+$N_n = 2N_{n - 1} + N_{n - 2} \quad N_0 = 1 \quad N_1 = 3 \\ f(x) = \sum^\infty_{n = 0}N_nx^n \\ = 1 + \sum^\infty_{n = 1}N_nx^n \\ $
 = 1 + 3x + \sum^\infty_{n = 2}N_nx^n \\ 
 = 1 + 3x + \sum^\infty_{n = 2}(2N_{n - 1} + N_{n - 2})x^n \\ 
 = 1 + 3x + \sum^\infty_{n = 2}2N_{n - 1}x^n + \sum^\infty_{n = 2}N_{n - 2}x^n \\ 
