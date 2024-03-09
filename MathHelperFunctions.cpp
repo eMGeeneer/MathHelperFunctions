@@ -13,6 +13,7 @@ double* sqrt2(int x) {
     return new double[2]{estimate, fabs((double) n[(x + 1) % 2] / (double) d[(x + 1) % 2] - estimate)};
 }
 
+// returns the number of bits occupied by a given unsigned long as a signed byte
 signed char getNumBits(unsigned long n) {
     signed char x = 0;
     if (n == 0) {
@@ -29,6 +30,7 @@ signed char getNumBits(unsigned long n) {
     return 64 - x;
 }
 
+// returns the greatest unsigned long less than a given unsigned long's square root 
 unsigned long fastIntSqrt(unsigned long n) {
     unsigned long max = (getNumBits(n) + 1) / 2;
     unsigned long min = 1 << max - 1;
@@ -51,9 +53,5 @@ unsigned long fastIntSqrt(unsigned long n) {
 }
 
 int main() {
-    printf("%.32f, %.32f\n", sqrt2(10)[0], sqrt2(10)[1]);
-    printf("%.32f, %.32f\n", sqrt2(20)[0], sqrt2(20)[1]);
-    printf("%.32f, %.32f\n", sqrt2(30)[0], sqrt2(30)[1]);
-
     return 0;
 }
