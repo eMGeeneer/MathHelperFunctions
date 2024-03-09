@@ -22,7 +22,7 @@ signed char getNumBits(unsigned long n) {
     }
     unsigned long compare = 1;
     for (unsigned int i = 32; i > 0; i /= 2) {
-        compare = (compare << i) - 1;
+        compare = (compare << i) - 1; // cut the space to check in half each time
         if (n <= compare) {
             x += i;
             n <<= i;
