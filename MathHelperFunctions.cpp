@@ -1,4 +1,3 @@
-#include <iostream>
 #include <math.h>
 
 // returns two doubles: an estimation of sqrt(2) and its error bounds
