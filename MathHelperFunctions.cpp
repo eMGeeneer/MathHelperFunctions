@@ -16,10 +16,10 @@ double* sqrt2(int x) {
 
 // returns the number of bits occupied by a given unsigned long as a signed byte
 signed char numBits(unsigned long n) {
-    signed char x = 0;
     if (n == 0) {
-        return x;
+        return n;
     }
+    signed char x = 0;
     unsigned long compare = 1;
     for (unsigned int i = 32; i > 0; i /= 2) {
         compare = (compare << i) - 1; // cut the space to check in half each time
