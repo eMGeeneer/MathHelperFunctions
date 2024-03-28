@@ -16,7 +16,7 @@ double* sqrt2(int x) {
 
 // returns the number of bits occupied by a given unsigned long as a signed byte
 signed char numBits(unsigned long n) {
-    if (n == 0) {
+    if (n < 2) {
         return n;
     }
     signed char x = 0;
