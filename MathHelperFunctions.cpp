@@ -39,7 +39,7 @@ unsigned long fastIntSqrt(unsigned long n) {
     }
     unsigned long max = (numBits(n) + 1) / 2;
     unsigned long min = 1 << max - 1;
-    max = 1 << max;
+    max = (1 << max) - 1;
     unsigned long x = (max + min) / 2;
     unsigned long sq = x * x;
     while(max > min && sq != n) {
