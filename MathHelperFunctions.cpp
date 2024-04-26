@@ -20,9 +20,9 @@ signed char numBits(unsigned long n) {
         return n;
     }
     signed char x = 0;
-    unsigned long compare = 1;
+    unsigned long compare = 0;
     for (unsigned int i = 32; i > 0; i /= 2) {
-        compare = (compare << i) - 1; // cut the space to check in half each time
+        compare = (compare + 1 << i) - 1; // cut the space to check in half each time
         if (n <= compare) {
             x += i;
             n <<= i;
