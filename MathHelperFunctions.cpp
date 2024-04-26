@@ -54,6 +54,9 @@ unsigned long fastIntSqrt(unsigned long n) {
             sq = x * x;
         }
     }
+    if (sq > n) {
+        x--;
+    }
     return x;
 }
 
