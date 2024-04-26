@@ -42,16 +42,12 @@ unsigned long fastIntSqrt(unsigned long n) {
     max = (1 << max) - 1;
     unsigned long x = (max + min) / 2;
     unsigned long sq = x * x;
-    while(max > min && sq != n) {
+    for(; max > min && sq != n; x = (max + min) / 2, sq = x * x) {
         if (sq > n) {
             max = x - 1;
-            x = (max + min) / 2;
-            sq = x * x;
         }
         else if (sq < n) {
             min = x + 1;
-            x = (max + min) / 2;
-            sq = x * x;
         }
     }
     if (sq > n) {
