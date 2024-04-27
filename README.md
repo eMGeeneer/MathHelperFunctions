@@ -3,8 +3,7 @@
 ## numBits
 
 By bit shifting an unsigned long until its most significant bit is 1, the most significant non-zero bit can be determined.
-We can check if the most significant non-zero bit is at the halfway point each time. This way, the function can operate at $O(\log_2(b))$ where $b$ is the number of bits.
-The number of bits increases logarithmically with the value of the long, so this function returns in $O(\log_2(\log_2(n)))$
+This function operates at a constant speed no matter the input. This is accomplished by performing a form of binary search, checking which half of the total space of integers the given integer presides in.
 
 ## fastIntSqrt
 
