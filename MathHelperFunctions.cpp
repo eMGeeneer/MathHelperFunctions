@@ -63,7 +63,7 @@ unsigned long fastIntSqrt(unsigned long n) {
 char bitString(bool bit[64], unsigned long n) {
     char i = 0;
     while (n > 0) {
-        bit[i] = n % 2 == 1;
+        bit[i] = n % 2;
         i++;
         n >>= 1;
     }
