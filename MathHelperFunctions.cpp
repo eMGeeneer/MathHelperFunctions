@@ -76,7 +76,7 @@ long exp(long b, unsigned long e) {
         return e == 1 ? b : 1;
     }
     long result = b;
-    bool bit[64] = {0};
+    bool bit[64];
     char n = bitString(bit, e) - 1;
     for (int i = n; i >= 0; i--) {
         result *= bit[i] ? result * b : result;
