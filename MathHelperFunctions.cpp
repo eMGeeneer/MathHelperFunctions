@@ -58,6 +58,33 @@ unsigned long fastIntSqrt(unsigned long n) {
     return x;
 }
 
+// sets the given array to be equal to the binary representation of the given unsigned long where the 0th index is the least significant bit and the 63rd index is the most
+void bitString(bool bit[64], unsigned long n) {
+    for (int i = 0; n > 0; i++, n >>= 1) {
+        bit[i] = n % 2 == 1;
+    }
+}
+
+// uses the bit string of the exponent to return the exponentiation in constant time
+long exp(long b, unsigned long e) {
+    if (e < 2) {
+        return e == 1 ? b : 1;
+    }
+    long result = b;
+    bool bit[64] = {0};
+    bool firstOneBit = false;
+    bitString(bit, e);
+    for (int i = 63; i >= 0; i--) {
+        if (!firstOneBit && bit[i]) {
+            firstOneBit = true;
+        }
+        else if (firstOneBit) {
+            result *= bit[i] ? result * b : result;
+        }
+    }
+    return result;
+}
+
 int main() {
     return 0;
 }
