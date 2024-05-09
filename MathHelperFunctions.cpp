@@ -70,7 +70,7 @@ char bitString(bool bit[64], unsigned long n) {
     return i - 1;
 }
 
-// uses the bit string of the exponent to return the exponentiation in constant time
+// uses the bit string of the exponent to return the exponentiation
 long exp(long b, unsigned long e) {
     if (e < 2) {
         return e == 1 ? b : 1;
