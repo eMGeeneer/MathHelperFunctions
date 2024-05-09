@@ -59,6 +59,7 @@ unsigned long fastIntSqrt(unsigned long n) {
 }
 
 // sets the given array to be equal to the binary representation of the given unsigned long where the 0th index is the least significant bit and the 63rd index is the most
+// also returns the position of the most significant bit
 char bitString(bool bit[64], unsigned long n) {
     char i = 0;
     while (n > 0) {
