@@ -21,3 +21,7 @@ A proof for the formula is attached. (I know I could've done it with matrices, I
 
 This sets a given boolean array to be equal the binary representation of an unsigned long where the 0th index is the least signficant bit and the 63rd index is the most signficant.
 The function is $O(log_2(n))$ as it simply reads the bits of the number out.
+
+# exp
+
+This returns the $b^e$ where $e$ is an unsigned long. This is performed in constant time.
