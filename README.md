@@ -16,3 +16,7 @@ The lower bound can be determined to be greater than half of the upper bound, or
 This returns an estimation of the square root of 2 using a recursive formula along with the error bounds of the estimation.
 The error bounds are calculated by retrieving the next estimate, subtracting the requested estimate from it, and taking its absolute value.
 A proof for the formula is attached. (I know I could've done it with matrices, I don't want to though)
+
+## bitString
+
+This sets a given boolean array to be equal the binary representation of an unsigned long.
