@@ -20,8 +20,8 @@ A proof for the formula is attached. (I know I could've done it with matrices, I
 ## quarternary
 
 This sets a given `char` array to be equal the quaternary representation of an unsigned long where the 0th index is the least signficant digit and the 31rd index is the most signficant.
-The function is $O(\log_2(n))$ as it simply reads the bits of the number out.
-It also returns the position of the most significant bit.
+The function is $O(\log_4(n))$ as it simply reads the bits of the number out.
+It also returns the position of the most significant digit.
 
 # exp
 
