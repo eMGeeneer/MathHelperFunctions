@@ -9,20 +9,22 @@ This function operates at a constant speed no matter the input. This is accompli
 
 This functions returns the greatest integer less than or equal to the square root of the input. `numBits(sqrt(n))` must be at most `(numBits(n) + 1) / 2`, as $\sqrt{n} = n^{\frac{1}{2}}$ This gives an upper bound to perform a binary search with.
 The lower bound can be determined to be greater than half of the upper bound, or simply the `upperBound / 2`. This is because $2^{\frac{\log_2(n) - 1}{2}} \leq \sqrt{n} \leq 2^{\frac{\log_2(n) + 1}{2}}$.
-Given that we are performing binary search on a space that scales linearly with the size of the square root, the function has a time complexity of $O(\frac{1}{2}\log_2(n))$
+Given that we are performing binary search on a space that scales linearly with the size of the square root, the function has a time complexity of $O(\frac{1}{2}\log_2(n))$.
 
 ## fastIntCbrt
 
 This functions returns the greatest integer less than or equal to the square root of the input. `numBits(cbrt(n))` must be at most `(numBits(n) + 2) / 3`, as $\sqrt[3]{n} = n^{\frac{1}{3}}$ This gives an upper bound to perform a binary search with.
 The lower bound can be determined to be greater than half of the upper bound, or simply the `upperBound / 4`. This is because $2^{\frac{\log_2(n)}{3} - 2} \leq \sqrt[3]{n} \leq 2^{\frac{\log_2(n + 2)}{3}}$.
-Given that we are performing binary search on a space that scales linearly with the size of the cuberoot, the function has a time complexity of $O(\frac{1}{3}\log_2(n))$
+Given that we are performing binary search on a space that scales linearly with the size of the cuberoot, the function has a time complexity of $O(\frac{1}{3}\log_2(n))$.
 
 ## fastIntNthRoot
 
 This functions returns the greatest integer less than or equal to the square root of the input. `numBits(nthRoot(x))` must be at most `(numBits(x) + n - 1) / n`, as $\sqrt[n]{x} = x^{\frac{1}{n}}$ This gives an upper bound to perform a binary search with.
 The lower bound can be determined to be greater than half of the upper bound, or simply the `upperBound / 4`. This is because $2^{\frac{\log_2(x)}{n} - 2} \leq \sqrt[n]{x} \leq 2^{\frac{\log_2(x) + n - 1}{n}}$.
 The power uses `exp()` which is performed in $O(\log_{12}(n))$ time.
-Given that we are performing binary search on a space that scales linearly with the size of the nth root, giving a time complexity of $O(\frac{1}{n}\log_{12}(2^{\frac{\log_2(x) + n}{n}})) = O(\frac{1}{n}{\frac{\log_2(x) + n}{n\log_2(12)}) = O({\frac{\log_2(x) + n}{n^2\log_2(12)})$
+Given that we are performing binary search on a space that scales linearly with the size of the nth root and each binary search requires another `exp()` call, these time complexities are multiplied together.
+$\frac{1}{n}\log_{12}(2^{\frac{\log_2(x) + n}{n}}) = \frac{1}{n}{\frac{\log_2(x) + n}{n\log_2(12)})$.
+The time complexity is $O({\frac{\log_2(x) + n}{n^2\log_2(12)})$.
 
 ## sqrt2
 
