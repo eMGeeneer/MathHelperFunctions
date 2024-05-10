@@ -58,28 +58,40 @@ unsigned long fastIntSqrt(unsigned long n) {
     return x;
 }
 
-// sets the given array to be equal to the binary representation of the given unsigned long where the 0th index is the least significant bit and the 63rd index is the most
-// also returns the position of the most significant bit
-char bitString(bool bit[64], unsigned long n) {
+// sets the given array to be equal to the quarternary representation of the given unsigned long where the 0th index is the least significant digit and the 31rd index is the most
+// also returns the position of the most significant digit
+char quaternary(char quad[32], unsigned long n) {
     char i = 0;
     while (n > 0) {
-        bit[i] = n % 2;
+        quad[i] = n % 4;
         i++;
-        n >>= 1;
+        n >>= 2;
     }
     return i - 1;
 }
 
-// uses the bit string of the exponent to return the exponentiation
 long exp(long b, unsigned long e) {
     if (e < 2) {
         return e == 1 ? b : 1;
     }
     long result = b;
-    bool bit[64];
-    char n = bitString(bit, e) - 1;
-    for (int i = n; i >= 0; i--) {
-        result *= bit[i] ? result * b : result;
+    char arr[32];
+    char n = quaternary(arr, e) - 1;
+    for (char i = n; i >= 0; i--) {
+        switch (arr[i]) {
+        case 0:
+            result *= result;
+            result *= result;
+        case 1:
+            result *= result;
+            result *= result * b;
+        case 2:
+            result *= result;
+            result *= result * b * b;
+        default:
+            result *= result;
+            result *= result * b * b * b;
+        }
     }
     return result;
 }
