@@ -1,9 +1,12 @@
-#include <math.h>
+// returns the absolute value of a double
+double abs(int x) {
+    return x >= 0 ? x : -x;
+}
 
 // returns two doubles: an estimation of sqrt(2) and its error bounds
 // this uses a recursive math function similar to the Fibonacci sequence to estimate
-// it has a numerator and a denominator
-double* sqrt2(int x) {
+// the numerator and denominator follow the same formula but have different starting values
+double sqrt2(int x, double* error) {
     long n[] = {1, 3}; // the starting values of the numerator
     long d[] = {1, 2}; // starting values of the denominator
     for (int i = 0; i < x; i++) {
@@ -11,7 +14,9 @@ double* sqrt2(int x) {
         d[i % 2] += 2 * d[(i + 1) % 2];
     }
     double estimate = (double) n[x % 2] / (double) d[x % 2];
-    return new double[2]{estimate, fabs((double) n[(x + 1) % 2] / (double) d[(x + 1) % 2] - estimate)};
+    double err = abs((double) n[(x + 1) % 2] / (double) d[(x + 1) % 2] - estimate)
+    error = &err;
+    return estimate;
 }
 
 // returns the number of bits occupied by a given unsigned long as a signed byte
@@ -74,20 +79,33 @@ long exp(long b, unsigned long e) {
     if (e < 2) {
         return e == 1 ? b : 1;
     }
-    long result = 1;
+    long result;
     char arr[32];
     char n = quaternary(arr, e);
-    for (char i = n; i >= 0; i--) {
+    switch (arr[n]) {
+    case 1:
+        result = b;
+        break;
+    case 2:
+        result = b * b;
+        break;
+    default:
+        result = b * b * b;
+    }
+    for (char i = n - 1; i >= 0; i--) {
         switch (arr[i]) {
         case 0:
             result *= result;
             result *= result;
+            break;
         case 1:
             result *= result;
             result *= result * b;
+            break;
         case 2:
             result *= result;
             result *= result * b * b;
+            break;
         default:
             result *= result;
             result *= result * b * b * b;
