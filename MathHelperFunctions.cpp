@@ -244,7 +244,7 @@ unsigned long fastIntNthRoot(unsigned long n, long x) {
     }
     unsigned long max = (numBits(num) + n - 1) / n;
     unnsigned long y = numBits(n) + 1;
-    unsigned long min = max >= y ? 1 << max - numBits(n) + 1 : 0;
+    unsigned long min = max >= y ? 1 << max - y : 0;
     max = (1 << max) - 1;
     y = (max + min) / 2;
     unsigned long pow = exp(y, n);
