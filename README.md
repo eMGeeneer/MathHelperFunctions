@@ -17,13 +17,13 @@ This returns an estimation of the square root of 2 using a recursive formula alo
 The error bounds are calculated by retrieving the next estimate, subtracting the requested estimate from it, and taking its absolute value.
 A proof for the formula is attached. (I know I could've done it with matrices, I don't want to though)
 
-## bitString
+## quarternary
 
-This sets a given boolean array to be equal the binary representation of an unsigned long where the 0th index is the least signficant bit and the 63rd index is the most signficant.
+This sets a given `char` array to be equal the quaternary representation of an unsigned long where the 0th index is the least signficant digit and the 31rd index is the most signficant.
 The function is $O(\log_2(n))$ as it simply reads the bits of the number out.
 It also returns the position of the most significant bit.
 
 # exp
 
-This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_2(n))$ as it is based on the position of the most significant bit given by bitString().
-By reading in the bitString of the exponent backwards starting from the 0 one position of significance below the most significant 1 bit. Since the case for $e = 0$ is already filtered out with the first `if` statement, there is guaranteed to be a leading 1 bit. This bit can be skipped as this would simply set the `accumulator` to be $b$. The following bits can then be read out in a similar manner to reconstructing the exponent. The number is effectively bit-shifted left each iteration and a 1 is added if a 1 is read out from the bitString. Since bit shifting is equivalent to multiplying by 2, this can be represented by squaring the `accumulator` as $b^2 = b \cdot b$. Then adding one can be represented by multiplying the `accumulator` by the given base as $b^{x + 1} = b^x \cdot b$
+This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_2(n))$ as it is based on the position of the most significant bit given by `quaternary()`.
+By reading in the quaternary representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is effectively bit-shifted left twice each iteration and a number $n$ is added if that number is read out from the bitString. Since bit shifting twice is equivalent to multiplying by 4, this can be represented by squaring the `accumulator` twice as $b^4 = b \cdot b \cdot b \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$
