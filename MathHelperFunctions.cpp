@@ -112,12 +112,12 @@ unsigned long fastIntNthRoot(unsigned long n, long x) {
     unsigned long min = 1 << max - n + 1;
     max = (1 << max) - 1;
     unsigned long y = (max + min) / 2;
-    unsigned long pow = exp(num, n);
+    unsigned long pow = exp(y, n);
     while(max > min && cb != num) {
-        if (pow > n) {
+        if (pow > num) {
             max = y - 1;
         }
-        else if (pow < n) {
+        else if (pow < num) {
             min = y + 1;
         }
         y = (max + min) / 2; 
