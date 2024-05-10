@@ -243,7 +243,7 @@ unsigned long fastIntNthRoot(unsigned long n, long x) {
         return n;
     }
     unsigned long max = (numBits(num) + n - 1) / n;
-    unsigned long min = 1 << max - 2;
+    unsigned long min = 1 << max - numBits(n) + 1;
     max = (1 << max) - 1;
     unsigned long y = (max + min) / 2;
     unsigned long pow = exp(y, n);
