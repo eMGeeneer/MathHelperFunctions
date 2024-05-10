@@ -96,7 +96,10 @@ unsigned long fastIntCbrt(long n) {
     return n > 0 ? x : -x;
 }
 
-//
+// returns the nth root of an integer
+// returns an error if n is 0
+// returns an error if n is even and x is negative
+// uses binary search
 unsigned long fastIntNthRoot(unsigned long n, long x) {
     if (!n) {
         throw std::domain_error("Can not take the 0th root of an integer");
