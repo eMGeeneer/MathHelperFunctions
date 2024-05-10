@@ -25,5 +25,5 @@ It also returns the position of the most significant bit.
 
 # exp
 
-This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_2(n))$ as it is based on the position of the most significant bit given by `quaternary()`.
+This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_4(n))$ as it is based on the position of the most significant bit given by `quaternary()`.
 By reading in the quaternary representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is effectively bit-shifted left twice each iteration and a number $n$ is added if that number is read out from the bitString. Since bit shifting twice is equivalent to multiplying by 4, this can be represented by squaring the `accumulator` twice as $b^4 = b \cdot b \cdot b \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$
