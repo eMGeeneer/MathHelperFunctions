@@ -74,9 +74,9 @@ long exp(long b, unsigned long e) {
     if (e < 2) {
         return e == 1 ? b : 1;
     }
-    long result = b;
+    long result = 1;
     char arr[32];
-    char n = quaternary(arr, e) - 1;
+    char n = quaternary(arr, e);
     for (char i = n; i >= 0; i--) {
         switch (arr[i]) {
         case 0:
