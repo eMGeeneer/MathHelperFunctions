@@ -36,7 +36,7 @@ char numBits(unsigned long n) {
     return 64 - x;
 }
 
-// returns the greatest unsigned long less than a given unsigned long's square root 
+// returns the greatest unsigned long less than or equal to a given unsigned long's square root 
 // uses binary search
 unsigned long fastIntSqrt(unsigned long n) {
     if (n < 2) {
@@ -58,6 +58,33 @@ unsigned long fastIntSqrt(unsigned long n) {
         sq = x * x;
     }
     if (sq > n) {
+        x--;
+    }
+    return x;
+}
+
+// returns the greatest unsigned long less than or equal to a given unsigned long's cube root 
+// uses binary search
+unsigned long fastIntCbrt(unsigned long n) {
+    if (n < 2) {
+        return n;
+    }
+    unsigned long max = (numBits(n) + 2) / 3;
+    unsigned long min = 1 << max - 2;
+    max = (1 << max) - 1;
+    unsigned long x = (max + min) / 2;
+    unsigned long cb = x * x * x;
+    while(max > min && cb != n) {
+        if (cb > n) {
+            max = x - 1;
+        }
+        else if (cb < n) {
+            min = x + 1;
+        }
+        x = (max + min) / 2; 
+        cb = x * x * x;
+    }
+    if (cb > n) {
         x--;
     }
     return x;
