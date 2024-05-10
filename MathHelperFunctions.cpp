@@ -3,6 +3,11 @@ double abs(int x) {
     return x >= 0 ? x : -x;
 }
 
+// returns the absolute value of a long
+unsigned long abs(long x) {
+    return x >= 0 ? x : -x;
+}
+
 // returns two doubles: an estimation of sqrt(2) and its error bounds
 // this uses a recursive math function similar to the Fibonacci sequence to estimate
 // the numerator and denominator follow the same formula but have different starting values
@@ -65,8 +70,9 @@ unsigned long fastIntSqrt(unsigned long n) {
 
 // returns the greatest unsigned long less than or equal to a given unsigned long's cube root 
 // uses binary search
-unsigned long fastIntCbrt(unsigned long n) {
-    if (n < 2) {
+unsigned long fastIntCbrt(long n) {
+    unsigned long num = abs(n);
+    if (num < 2) {
         return n;
     }
     unsigned long max = (numBits(n) + 2) / 3;
@@ -87,7 +93,40 @@ unsigned long fastIntCbrt(unsigned long n) {
     if (cb > n) {
         x--;
     }
-    return x;
+    return n > 0 ? x : -x;
+}
+
+//
+unsigned long fastIntNthRoot(unsigned long n, long x) {
+    if (!n) {
+        throw std::domain_error("Can not take the 0th root of an integer");
+    }
+    if (x < 0 && !(n % 2)) {
+        throw std::domain_error("Can not take even root of a negative number");
+    }
+    unsigned long num = abs(x);
+    if (num < 2) {
+        return n;
+    }
+    unsigned long max = (numBits(num) + n - 1) / n;
+    unsigned long min = 1 << max - n + 1;
+    max = (1 << max) - 1;
+    unsigned long y = (max + min) / 2;
+    unsigned long pow = exp(num, n);
+    while(max > min && cb != num) {
+        if (pow > n) {
+            max = y - 1;
+        }
+        else if (pow < n) {
+            min = y + 1;
+        }
+        y = (max + min) / 2; 
+        pow = exp(num, n);
+    }
+    if (pow > n) {
+        y--;
+    }
+    return x > 0 ? y : -y;
 }
 
 // sets the given array to be equal to the base 12 representation of the given unsigned long where the 0th index is the least significant digit and the 5th index is the most
