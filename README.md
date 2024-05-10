@@ -17,13 +17,13 @@ This returns an estimation of the square root of 2 using a recursive formula alo
 The error bounds are calculated by retrieving the next estimate, subtracting the requested estimate from it, and taking its absolute value.
 A proof for the formula is attached. (I know I could've done it with matrices, I don't want to though)
 
-## quarternary
+## dozenal
 
-This sets a given `char` array to be equal the quaternary representation of an unsigned long where the 0th index is the least signficant digit and the 31rd index is the most signficant.
-The function is $O(\log_4(n))$ as it simply reads the bits of the number out.
+This sets a given `char` array to be equal the quaternary representation of an unsigned long where the 0th index is the least signficant digit and the 5th index is the most signficant.
+The function is $O(\log_12(n))$ as it simply reads the bits of the number out.
 It also returns the position of the most significant digit.
 
 # exp
 
-This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_4(n))$ as it is based on the position of the most significant bit given by `quaternary()`.
-By reading in the quaternary representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is effectively bit-shifted left twice each iteration and a number $n$ is added if that number is read out from the bitString. Since bit shifting twice is equivalent to multiplying by 4, this can be represented by squaring the `accumulator` twice as $b^4 = b \cdot b \cdot b \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$
+This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_12(n))$ as it is based on the position of the most significant bit given by `quaternary()`.
+By reading in the quaternary representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 12 each iteration and a number $n$ is added if that number is read out from the bitString. This can be represented by raising the `accumulator` to the power of 12 as $b^12 = b \cdot b \cdot b \cdot \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$
