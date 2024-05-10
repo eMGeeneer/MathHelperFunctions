@@ -25,5 +25,6 @@ It also returns the position of the most significant digit.
 
 # exp
 
-This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_12(n))$ as it is based on the position of the most significant bit given by `quaternary()`.
-By reading in the quaternary representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 12 each iteration and a number $n$ is added if that number is read out from the bitString. This can be represented by raising the `accumulator` to the power of 12 as $b^12 = b \cdot b \cdot b \cdot \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$
+This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(log_{12}(n))$ as it is based on the position of the most significant bit given by `quaternary()`.
+By reading in the base 12 representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 12 each iteration and a number $n$ is added if that number is read out from the base 12 representation. This can be represented by raising the `accumulator` to the power of 12 as $b^12 = b \cdot b \cdot b \cdot \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$.
+Base 12 was chosen through running multiple trials of different bases until the most optimal base was found.
