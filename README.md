@@ -23,7 +23,7 @@ This functions returns the greatest integer less than or equal to the square roo
 The lower bound can be determined to be greater than half of the upper bound, or simply the `upperBound / 4`. This is because $2^{\frac{\log_2(x)}{n} - 2} \leq \sqrt[n]{x} \leq 2^{\frac{\log_2(x) + n - 1}{n}}$.
 The power uses `exp()` which is performed in $O(\log_{12}(n))$ time.
 Given that we are performing binary search on a space that scales linearly with the size of the nth root and each binary search requires another `exp()` call, these time complexities are multiplied together.
-$\frac{1}{n}\log_{12}(2^{\frac{\log_2(x) + n}{n}}) = \frac{1}{n}\frac{\log_2(x) + n}{n\log_2(12)})$.
+$\frac{1}{n}\log_{12}(2^{\frac{\log_2(x) + n + 1}{n}}) = \frac{1}{n}\frac{\log_2(x) + n + 1}{n\log_2(12)})$.
 The time complexity is $O(\frac{\log_2(x) + n}{n^2\log_2(12)})$.
 
 ## sqrt2
