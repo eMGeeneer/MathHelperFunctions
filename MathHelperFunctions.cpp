@@ -207,7 +207,7 @@ unsigned long fastIntCbrt(long n) {
         return n;
     }
     unsigned long max = (numBits(n) + 2) / 3;
-    unsigned long min = 1 << max - 2;
+    unsigned long min = max > 1 ? 1 << max - 2: 0;
     max = (1 << max) - 1;
     unsigned long x = (max + min) / 2;
     unsigned long cb = x * x * x;
@@ -243,9 +243,10 @@ unsigned long fastIntNthRoot(unsigned long n, long x) {
         return n;
     }
     unsigned long max = (numBits(num) + n - 1) / n;
-    unsigned long min = 1 << max - numBits(n) + 1;
+    unnsigned long y = numBits(n) + 1;
+    unsigned long min = max >= y ? 1 << max - numBits(n) + 1 : 0;
     max = (1 << max) - 1;
-    unsigned long y = (max + min) / 2;
+    y = (max + min) / 2;
     unsigned long pow = exp(y, n);
     while(max > min && pow != num) {
         if (pow > num) {
