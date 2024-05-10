@@ -63,14 +63,14 @@ unsigned long fastIntSqrt(unsigned long n) {
     return x;
 }
 
-// sets the given array to be equal to the quarternary representation of the given unsigned long where the 0th index is the least significant digit and the 31rd index is the most
+// sets the given array to be equal to the base 12 representation of the given unsigned long where the 0th index is the least significant digit and the 5th index is the most
 // also returns the position of the most significant digit
-char quaternary(char quad[32], unsigned long n) {
+char dozenal(char dozen[6], unsigned long n) {
     char i = 0;
     while (n > 0) {
-        quad[i] = n % 4;
+        dozen[i] = n % 12;
         i++;
-        n >>= 2;
+        n /= 12;
     }
     return i - 1;
 }
@@ -80,35 +80,115 @@ long exp(long b, unsigned long e) {
         return e == 1 ? b : 1;
     }
     long result;
-    char arr[32];
-    char n = quaternary(arr, e);
-    switch (arr[n]) {
+    char dozen[6];
+    char n = dozenal(dozen, e);
+    switch (dozen[n]) {
     case 1:
         result = b;
         break;
     case 2:
         result = b * b;
         break;
-    default:
+    case 3:
         result = b * b * b;
+        break;
+    case 4:
+        result = b * b;
+        result *= result;
+        break;
+    case 5:
+        result = b * b;
+        result *= result * b;
+        break;
+    case 6:
+        result = b * b * b;
+        result *= result;
+        break;
+    case 7:
+        result = b * b * b;
+        result *= result * b;
+        break;
+    case 8:
+        result = b * b;
+        result *= result;
+        result *= result;
+        break;
+    case 9:
+        result = b * b;
+        result *= result;
+        result *= result * b;
+        break;
+    case 10:
+        result = b * b;
+        result *= result * b;
+        result *= result;
+        break;
+    default:
+        result = b * b;
+        result *= result * b;
+        result *= result * b;
     }
     for (char i = n - 1; i >= 0; i--) {
-        switch (arr[i]) {
+        switch (dozen[i]) {
         case 0:
+            result *= result * result;
             result *= result;
             result *= result;
             break;
         case 1:
+            result *= result * result;
             result *= result;
             result *= result * b;
             break;
         case 2:
+            result *= result * result;
+            result *= result * b;
             result *= result;
-            result *= result * b * b;
+            break;
+        case 3:
+            result *= result;
+            result *= result * b;
+            result *= result * result;
+            break;
+        case 4:
+            result *= result * result * b;
+            result *= result;
+            result *= result;
+            break;
+        case 5:
+            result *= result * result * b;
+            result *= result;
+            result *= result * b;
+            break;
+        case 6:
+            result *= result * b;
+            result *= result;
+            result *= result * result;
+            break;
+        case 7:
+            result *= result * b;
+            result *= result;
+            result *= result * result * b;
+            break;
+        case 8:
+            result *= result * result * b * b;
+            result *= result;
+            result *= result;
+            break;
+        case 9:
+            result *= result * result * b * b;
+            result *= result;
+            result *= result * b;
+            break;
+        case 10:
+            result *= result * result * b * b;
+            result *= result * b;
+            result *= result;
             break;
         default:
-            result *= result;
-            result *= result * b * b * b;
+            result *= result * result * b * b;
+            result *= result * b;
+            result *= result * b;
         }
     }
     return result;
