@@ -41,97 +41,6 @@ char numBits(unsigned long n) {
     return 64 - x;
 }
 
-// returns the greatest unsigned long less than or equal to a given unsigned long's square root 
-// uses binary search
-unsigned long fastIntSqrt(unsigned long n) {
-    if (n < 2) {
-        return n;
-    }
-    unsigned long max = (numBits(n) + 1) / 2;
-    unsigned long min = 1 << max - 1;
-    max = (1 << max) - 1;
-    unsigned long x = (max + min) / 2;
-    unsigned long sq = x * x;
-    while(max > min && sq != n) {
-        if (sq > n) {
-            max = x - 1;
-        }
-        else if (sq < n) {
-            min = x + 1;
-        }
-        x = (max + min) / 2; 
-        sq = x * x;
-    }
-    if (sq > n) {
-        x--;
-    }
-    return x;
-}
-
-// returns the greatest unsigned long less than or equal to a given unsigned long's cube root 
-// uses binary search
-unsigned long fastIntCbrt(long n) {
-    unsigned long num = abs(n);
-    if (num < 2) {
-        return n;
-    }
-    unsigned long max = (numBits(n) + 2) / 3;
-    unsigned long min = 1 << max - 2;
-    max = (1 << max) - 1;
-    unsigned long x = (max + min) / 2;
-    unsigned long cb = x * x * x;
-    while(max > min && cb != n) {
-        if (cb > n) {
-            max = x - 1;
-        }
-        else if (cb < n) {
-            min = x + 1;
-        }
-        x = (max + min) / 2; 
-        cb = x * x * x;
-    }
-    if (cb > n) {
-        x--;
-    }
-    return n > 0 ? x : -x;
-}
-
-// returns the nth root of an integer
-// returns an error if n is 0
-// returns an error if n is even and x is negative
-// uses binary search
-unsigned long fastIntNthRoot(unsigned long n, long x) {
-    if (!n) {
-        throw std::domain_error("Can not take the 0th root of an integer");
-    }
-    if (x < 0 && !(n % 2)) {
-        throw std::domain_error("Can not take even root of a negative number");
-    }
-    unsigned long num = abs(x);
-    if (num < 2) {
-        return n;
-    }
-    unsigned long max = (numBits(num) + n - 1) / n;
-    unsigned long min = 1 << max - n + 1;
-    max = (1 << max) - 1;
-    unsigned long y = (max + min) / 2;
-    unsigned long pow = exp(y, n);
-    while(max > min && cb != num) {
-        if (pow > num) {
-            max = y - 1;
-        }
-        else if (pow < num) {
-            min = y + 1;
-        }
-        y = (max + min) / 2; 
-        pow = exp(num, n);
-    }
-    if (pow > n) {
-        y--;
-    }
-    return x > 0 ? y : -y;
-}
-
 // sets the given array to be equal to the base 12 representation of the given unsigned long where the 0th index is the least significant digit and the 5th index is the most
 // also returns the position of the most significant digit
 char dozenal(char dozen[6], unsigned long n) {
@@ -261,6 +170,97 @@ long exp(long b, unsigned long e) {
         }
     }
     return result;
+}
+
+// returns the greatest unsigned long less than or equal to a given unsigned long's square root 
+// uses binary search
+unsigned long fastIntSqrt(unsigned long n) {
+    if (n < 2) {
+        return n;
+    }
+    unsigned long max = (numBits(n) + 1) / 2;
+    unsigned long min = 1 << max - 1;
+    max = (1 << max) - 1;
+    unsigned long x = (max + min) / 2;
+    unsigned long sq = x * x;
+    while(max > min && sq != n) {
+        if (sq > n) {
+            max = x - 1;
+        }
+        else if (sq < n) {
+            min = x + 1;
+        }
+        x = (max + min) / 2; 
+        sq = x * x;
+    }
+    if (sq > n) {
+        x--;
+    }
+    return x;
+}
+
+// returns the greatest unsigned long less than or equal to a given unsigned long's cube root 
+// uses binary search
+unsigned long fastIntCbrt(long n) {
+    unsigned long num = abs(n);
+    if (num < 2) {
+        return n;
+    }
+    unsigned long max = (numBits(n) + 2) / 3;
+    unsigned long min = 1 << max - 2;
+    max = (1 << max) - 1;
+    unsigned long x = (max + min) / 2;
+    unsigned long cb = x * x * x;
+    while(max > min && cb != n) {
+        if (cb > n) {
+            max = x - 1;
+        }
+        else if (cb < n) {
+            min = x + 1;
+        }
+        x = (max + min) / 2; 
+        cb = x * x * x;
+    }
+    if (cb > n) {
+        x--;
+    }
+    return n > 0 ? x : -x;
+}
+
+// returns the nth root of an integer
+// returns an error if n is 0
+// returns an error if n is even and x is negative
+// uses binary search
+unsigned long fastIntNthRoot(unsigned long n, long x) {
+    if (!n) {
+        throw std::domain_error("Can not take the 0th root of an integer");
+    }
+    if (x < 0 && !(n % 2)) {
+        throw std::domain_error("Can not take even root of a negative number");
+    }
+    unsigned long num = abs(x);
+    if (num < 2) {
+        return n;
+    }
+    unsigned long max = (numBits(num) + n - 1) / n;
+    unsigned long min = 1 << max - 2;
+    max = (1 << max) - 1;
+    unsigned long y = (max + min) / 2;
+    unsigned long pow = exp(y, n);
+    while(max > min && pow != num) {
+        if (pow > num) {
+            max = y - 1;
+        }
+        else if (pow < num) {
+            min = y + 1;
+        }
+        y = (max + min) / 2; 
+        pow = exp(num, n);
+    }
+    if (pow > n) {
+        y--;
+    }
+    return x > 0 ? y : -y;
 }
 
 int main() {
