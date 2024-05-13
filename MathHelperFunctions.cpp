@@ -92,9 +92,8 @@ long exp(long b, unsigned long e) {
         result *= result;
         break;
     case 9:
-        result = b * b;
-        result *= result;
-        result *= result * b;
+        result = b * b * b;
+        result *= result * result;
         break;
     case 10:
         result = b * b;
