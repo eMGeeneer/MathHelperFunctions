@@ -231,10 +231,10 @@ unsigned long fastIntCbrt(long n) {
 // returns an error if n is even and x is negative
 // uses binary search
 unsigned long fastIntNthRoot(unsigned long n, long x) {
-    if (!n) {
+    if (n == 0) {
         throw std::domain_error("Can not take the 0th root of an integer");
     }
-    if (x < 0 && !(n % 2)) {
+    if (x < 0 && (n % 2) == 0) {
         throw std::domain_error("Can not take even root of a negative number");
     }
     unsigned long num = abs(x);
