@@ -12,8 +12,8 @@ unsigned long abs(long x) {
 // this uses a recursive math function similar to the Fibonacci sequence to estimate
 // the numerator and denominator follow the same formula but have different starting values
 double sqrt2(int x, double* error) {
-    long n[] = {1, 3}; // the starting values of the numerator
-    long d[] = {1, 2}; // starting values of the denominator
+    long n[2] = {1, 3}; // the starting values of the numerator
+    long d[2] = {1, 2}; // starting values of the denominator
     for (int i = 0; i < x; i++) {
         n[i % 2] += 2 * n[(i + 1) % 2]; // how each subsequent value is defined
         d[i % 2] += 2 * d[(i + 1) % 2];
@@ -21,8 +21,6 @@ double sqrt2(int x, double* error) {
     double estimate = (double) n[x % 2] / (double) d[x % 2];
     double err = abs((double) n[(x + 1) % 2] / (double) d[(x + 1) % 2] - estimate)
     error = &err;
-    delete[] n;
-    delete[] d;
     return estimate;
 }
 
@@ -170,7 +168,6 @@ long exp(long b, unsigned long e) {
             result *= result * b;
         }
     }
-    delete[] dozen;
     return result;
 }
 
