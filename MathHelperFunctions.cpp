@@ -21,6 +21,8 @@ double sqrt2(int x, double* error) {
     double estimate = (double) n[x % 2] / (double) d[x % 2];
     double err = abs((double) n[(x + 1) % 2] / (double) d[(x + 1) % 2] - estimate)
     error = &err;
+    delete[] n;
+    delete[] d;
     return estimate;
 }
 
@@ -168,6 +170,7 @@ long exp(long b, unsigned long e) {
             result *= result * b;
         }
     }
+    delete[] dozen;
     return result;
 }
 
