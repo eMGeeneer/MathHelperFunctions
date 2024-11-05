@@ -30,7 +30,7 @@ char numBits(unsigned long n) {
         return n;
     }
     char x = 0;
-    unsigned long compare = 0;
+    unsigned long compare;
     for (char i = 32; i > 0; i /= 2) {
         compare = (compare + 1 << i) - 1; // cut the space to check in half each time
         if (n <= compare) {
