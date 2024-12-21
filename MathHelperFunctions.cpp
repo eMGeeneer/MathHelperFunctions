@@ -30,14 +30,15 @@ char numBits(unsigned long n) {
         return n;
     }
     char x = 0;
-    unsigned long compare;
-    for (char i = 32; i > 0; i /= 2) {
-        compare = (1 << i) - 1; // cut the space to check in half each time
-        if (n <= compare) {
-            x += i;
-            n <<= i;
-        }
-    }
+    unsigned long compare = 1L << 32;
+	for (char i = 32; i > 0; i /= 2) {
+		if (n <= --compare) {
+			x += i;
+			n <<= i;
+		}
+		printf("%lu, %lu\n", n, compare);
+		compare <<= i / 2; // cut the space to check in half each time
+	}
     return 64 - x;
 }
 
