@@ -36,7 +36,6 @@ char numBits(unsigned long n) {
 			x += i;
 			n <<= i;
 		}
-		printf("%lu, %lu\n", n, compare);
 		compare <<= i / 2; // cut the space to check in half each time
 	}
     return 64 - x;
