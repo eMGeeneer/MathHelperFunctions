@@ -34,7 +34,7 @@ A proof for the formula is attached. (I know I could've done it with matrices, I
 
 ## hex
 
-This sets a given `char` array to be equal the hexadecimal representation of an unsigned long where the 0th index is the least signficant digit and the 16th index is the most signficant.
+This sets a given `char` array to be equal the hexadecimal representation of an unsigned long where the 0th index is the least signficant digit and the 15th index is the most signficant.
 The function is $O(\log_{16}(n))$ as it simply reads the bits of the number out.
 It also returns the position of the most significant digit.
 
