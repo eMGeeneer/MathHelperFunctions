@@ -34,7 +34,7 @@ A proof for the formula is attached. (I know I could've done it with matrices, I
 
 ## hex
 
-This sets a given `char` array to be equal the octal representation of an unsigned long where the 0th index is the least signficant digit and the 16th index is the most signficant.
+This sets a given `char` array to be equal the hexadecimal representation of an unsigned long where the 0th index is the least signficant digit and the 16th index is the most signficant.
 The function is $O(\log_{16}(n))$ as it simply reads the bits of the number out.
 It also returns the position of the most significant digit.
 
@@ -42,4 +42,4 @@ It also returns the position of the most significant digit.
 
 This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(\log_{16}(n))$ as it is based on the position of the most significant bit given by `hex()`.
 By reading in the base 16 representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 16 each iteration and a number $n \text{mod} 16$ is added to the `accumulator`. This can be represented by raising the `accumulator` to the power of 16 as $b^{16} = b \cdot b \cdot b \cdot b \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$.
-Base 16 was chosen through running multiple trials of different bases until the most optimal base was found. This is likely due to 8 being a power of 2, making division and modulus operations much faster, and the base-16 representation of a number having the same number of possible options for each digit as the total number of digits in the base.
+Base 16 was chosen as a balance of having smaller code and performance. Faster performance can be acheived using higher powers of 2, however, this starts to drastically increase the size of the program itselfs. Powers of 2 seem to be ideal as division and modulus operations much faster than using other numbers.
