@@ -32,14 +32,14 @@ This returns an estimation of the square root of 2 using a recursive formula alo
 The error bounds are calculated by retrieving the next estimate, subtracting the requested estimate from it, and taking its absolute value.
 A proof for the formula is attached. (I know I could've done it with matrices, I don't want to though)
 
-## octal
+## hex
 
-This sets a given `char` array to be equal the octal representation of an unsigned long where the 0th index is the least signficant digit and the 23th index is the most signficant.
-The function is $O(\log_{8}(n))$ as it simply reads the bits of the number out.
+This sets a given `char` array to be equal the octal representation of an unsigned long where the 0th index is the least signficant digit and the 16th index is the most signficant.
+The function is $O(\log_{16}(n))$ as it simply reads the bits of the number out.
 It also returns the position of the most significant digit.
 
 ## exp
 
-This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(\log_{8}(n))$ as it is based on the position of the most significant bit given by `octal()`.
-By reading in the base 8 representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 8 each iteration and a number $n \text{mod} 8$ is added to the array. This can be represented by raising the `accumulator` to the power of 8 as $b^{8} = b \cdot b \cdot b \cdot b \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$.
-Base 8 was chosen through running multiple trials of different bases until the most optimal base was found. This is likely due to 8 being a power of 2, making division and modulus operations much faster, and the base-8 representation of a number being significantly shorter in length than many other cnadidates while still keeping the base small.
+This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(\log_{16}(n))$ as it is based on the position of the most significant bit given by `hex()`.
+By reading in the base 16 representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 16 each iteration and a number $n \text{mod} 16$ is added to the `accumulator`. This can be represented by raising the `accumulator` to the power of 16 as $b^{16} = b \cdot b \cdot b \cdot b \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$.
+Base 16 was chosen through running multiple trials of different bases until the most optimal base was found. This is likely due to 8 being a power of 2, making division and modulus operations much faster, and the base-16 representation of a number having the same number of possible options for each digit as the total number of digits in the base.
