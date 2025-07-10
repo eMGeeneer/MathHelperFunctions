@@ -32,14 +32,14 @@ This returns an estimation of the square root of 2 using a recursive formula alo
 The error bounds are calculated by retrieving the next estimate, subtracting the requested estimate from it, and taking its absolute value.
 A proof for the formula is attached. (I know I could've done it with matrices, I don't want to though)
 
-## dozenal
+## octal
 
-This sets a given `char` array to be equal the quaternary representation of an unsigned long where the 0th index is the least signficant digit and the 5th index is the most signficant.
-The function is $O(\log_{12}(n))$ as it simply reads the bits of the number out.
+This sets a given `char` array to be equal the octal representation of an unsigned long where the 0th index is the least signficant digit and the 23th index is the most signficant.
+The function is $O(\log_{8}(n))$ as it simply reads the bits of the number out.
 It also returns the position of the most significant digit.
 
 # exp
 
-This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(\log_{12}(n))$ as it is based on the position of the most significant bit given by `dozenal()`.
-By reading in the base 12 representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 12 each iteration and a number $n$ is added if that number is read out from the base 12 representation. This can be represented by raising the `accumulator` to the power of 12 as $b^{12} = b \cdot b \cdot b \cdot b \dots b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$.
-Base 12 was chosen through running multiple trials of different bases until the most optimal base was found. This is likely due to 12's property as an highly composite number.
+This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(\log_{8}(n))$ as it is based on the position of the most significant bit given by `octal()`.
+By reading in the base 8 representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 8 each iteration and a number $n \text{mod} 8$ is added to the array. This can be represented by raising the `accumulator` to the power of 8 as $b^{8} = b \cdot b \cdot b \cdot b \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$.
+Base 8 was chosen through running multiple trials of different bases until the most optimal base was found. This is likely due to 8 being a power of 2, making division and modulus operations much faster, and the base-8 representation of a number being significantly shorter in length than many other cnadidates while still keeping the base small.
