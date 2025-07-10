@@ -38,7 +38,7 @@ This sets a given `char` array to be equal the octal representation of an unsign
 The function is $O(\log_{8}(n))$ as it simply reads the bits of the number out.
 It also returns the position of the most significant digit.
 
-# exp
+## exp
 
 This returns the $b^e$ where $e$ is an unsigned long. This is performed $O(\log_{8}(n))$ as it is based on the position of the most significant bit given by `octal()`.
 By reading in the base 8 representation of the exponent backwards starting from the 0 one position of significance below the most significant non-zero digit. The number is divided by 8 each iteration and a number $n \text{mod} 8$ is added to the array. This can be represented by raising the `accumulator` to the power of 8 as $b^{8} = b \cdot b \cdot b \cdot b \dots \cdot b$. Then adding $n$ can be represented by multiplying the `accumulator` by the given base as $b^{x + n} = b^x \cdot b^n$.
