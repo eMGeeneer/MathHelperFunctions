@@ -41,134 +41,95 @@ char numBits(unsigned long n) {
     return 64 - x;
 }
 
-// sets the given array to be equal to the base 12 representation of the given unsigned long where the 0th index is the least significant digit and the 5th index is the most
+// sets the given array to be equal to the base 8 representation of the given unsigned long where the 0th index is the least significant digit and the 23rd index is the most
 // also returns the position of the most significant digit
-char dozenal(char dozen[6], unsigned long n) {
-    char i = 0;
-    while (n > 0) {
-        dozen[i] = n % 12;
-        i++;
-        n /= 12;
-    }
-    return i - 1;
+char octal(char* octet, unsigned long n) {
+	char i = 0;
+	while (n > 0) {
+		octet[i] = n & 0b111;
+		i++;
+		n >>= 3;
+	}
+	return i - 1;
 }
 
-long exp(long b, unsigned long e) {
-    if (e < 2) {
-        return e == 1 ? b : 1;
-    }
-    long result;
-    char dozen[6];
-    char n = dozenal(dozen, e);
-    switch (dozen[n]) {
-    case 1:
-        result = b;
-        break;
-    case 2:
-        result = b * b;
-        break;
-    case 3:
-        result = b * b * b;
-        break;
-    case 4:
-        result = b * b;
-        result *= result;
-        break;
-    case 5:
-        result = b * b;
-        result *= result * b;
-        break;
-    case 6:
-        result = b * b * b;
-        result *= result;
-        break;
-    case 7:
-        result = b * b * b;
-        result *= result * b;
-        break;
-    case 8:
-        result = b * b;
-        result *= result;
-        result *= result;
-        break;
-    case 9:
-        result = b * b * b;
-        result *= result * result;
-        break;
-    case 10:
-        result = b * b;
-        result *= result * b;
-        result *= result;
-        break;
-    default:
-        result = b * b;
-        result *= result * b;
-        result *= result * b;
-    }
-    for (char i = n - 1; i >= 0; i--) {
-        switch (dozen[i]) {
-        case 0:
-            result *= result * result;
-            result *= result;
-            result *= result;
-            break;
-        case 1:
-            result *= result * result;
-            result *= result;
-            result *= result * b;
-            break;
-        case 2:
-            result *= result * result;
-            result *= result * b;
-            result *= result;
-            break;
-        case 3:
-            result *= result;
-            result *= result * b;
-            result *= result * result;
-            break;
-        case 4:
-            result *= result * result * b;
-            result *= result;
-            result *= result;
-            break;
-        case 5:
-            result *= result * result * b;
-            result *= result;
-            result *= result * b;
-            break;
-        case 6:
-            result *= result * b;
-            result *= result;
-            result *= result * result;
-            break;
-        case 7:
-            result *= result * b;
-            result *= result;
-            result *= result * result * b;
-            break;
-        case 8:
-            result *= result * result * b * b;
-            result *= result;
-            result *= result;
-            break;
-        case 9:
-            result *= result * b;
-            result *= result * b;
-            result *= result * result;
-            break;
-        case 10:
-            result *= result * result * b * b;
-            result *= result * b;
-            result *= result;
-            break;
-        default:
-            result *= result * result * b * b;
-            result *= result * b;
-            result *= result * b;
-        }
-    }
-    return result;
+long exp8(long b, unsigned long e) {
+	if (e < 2) {
+		return e == 1 ? b : 1;
+	}
+	long result;
+	char octet[23];
+	char n = octal(&(octet[0]), e);
+	switch (octet[n]) {
+	case 1:
+		result = b;
+		break;
+	case 2:
+		result = b * b;
+		break;
+	case 3:
+		result = b * b * b;
+		break;
+	case 4:
+		result = b * b;
+		result *= result;
+		break;
+	case 5:
+		result = b * b;
+		result *= result * b;
+		break;
+	case 6:
+		result = b * b * b;
+		result *= result;
+		break;
+	default:
+		result = b * b * b;
+		result *= result * b;
+	}
+	for (char i = n - 1; i >= 0; i--) {
+		switch (octet[i]) {
+		case 0:
+			result *= result;
+			result *= result;
+			result *= result;
+			break;
+		case 1:
+			result *= result;
+			result *= result;
+			result *= result * b;
+			break;
+		case 2:
+			result *= result;
+			result *= result * b;
+			result *= result;
+			break;
+		case 3:
+			result *= result;
+			result *= result * b;
+			result *= result * b;
+			break;
+		case 4:
+			result *= result * b;
+			result *= result;
+			result *= result;
+			break;
+		case 5:
+			result *= result * b;
+			result *= result;
+			result *= result * b;
+			break;
+		case 6:
+			result *= result * b;
+			result *= result * b;
+			result *= result;
+			break;
+		default:
+			result *= result * b;
+			result *= result * b;
+			result *= result * b;
+		}
+	}
+	return result;
 }
 
 // returns the greatest unsigned long less than or equal to a given unsigned long's square root 
