@@ -41,26 +41,26 @@ char numBits(unsigned long n) {
     return 64 - x;
 }
 
-// sets the given array to be equal to the base 8 representation of the given unsigned long where the 0th index is the least significant digit and the 23rd index is the most
+// sets the given array to be equal to the base 16 representation of the given unsigned long where the 0th index is the least significant digit and the 16th index is the most
 // also returns the position of the most significant digit
-char octal(char* octet, unsigned long n) {
+char hex(char* hexcode, unsigned long n) {
 	char i = 0;
 	while (n > 0) {
-		octet[i] = n & 0b111;
+		hexcode[i] = n & 0b1111;
 		i++;
-		n >>= 3;
+		n >>= 4;
 	}
 	return i - 1;
 }
 
-long exp8(long b, unsigned long e) {
+long exp16(long b, unsigned long e) {
 	if (e < 2) {
 		return e == 1 ? b : 1;
 	}
 	long result;
-	char octet[23];
-	char n = octal(&(octet[0]), e);
-	switch (octet[n]) {
+	char hexcode[16];
+	char n = hex(&(hexcode[0]), e);
+	switch (hexcode[n]) {
 	case 1:
 		result = b;
 		break;
@@ -82,13 +82,53 @@ long exp8(long b, unsigned long e) {
 		result = b * b * b;
 		result *= result;
 		break;
-	default:
+	case 7:
 		result = b * b * b;
 		result *= result * b;
+		break;
+	case 8:
+		result = b * b;
+		result *= result;
+		result *= result;
+		break;
+	case 9:
+		result = b * b * b;
+		result *= result * result;
+		break;
+	case 10:
+		result = b * b;
+		result *= result * b;
+		result *= result;
+		break;
+	case 11:
+		result = b * b;
+		result *= result * b;
+		result *= result * b;
+		break;
+	case 12:
+		result = b * b * b;
+		result *= result;
+		result *= result;
+		break;
+	case 13:
+		result = b * b * b;
+		result *= result;
+		result *= result;
+		break;
+	case 14:
+		result = b * b * b;
+		result *= result * b;
+		result *= result;
+		break;
+	default:
+		result = b * b;
+		result *= result * b;
+		result *= result * result;
 	}
 	for (char i = n - 1; i >= 0; i--) {
-		switch (octet[i]) {
+		switch (hexcode[i]) {
 		case 0:
+			result *= result;
 			result *= result;
 			result *= result;
 			result *= result;
@@ -96,34 +136,89 @@ long exp8(long b, unsigned long e) {
 		case 1:
 			result *= result;
 			result *= result;
+			result *= result;
 			result *= result * b;
 			break;
 		case 2:
+			result *= result;
 			result *= result;
 			result *= result * b;
 			result *= result;
 			break;
 		case 3:
 			result *= result;
+			result *= result;
 			result *= result * b;
 			result *= result * b;
 			break;
 		case 4:
+			result *= result;
 			result *= result * b;
 			result *= result;
 			result *= result;
 			break;
 		case 5:
+			result *= result;
 			result *= result * b;
 			result *= result;
 			result *= result * b;
 			break;
 		case 6:
+			result *= result;
+			result *= result * b;
+			result *= result * b;
+			result *= result;
+			break;
+		case 7:
+			result *= result;
+			result *= result * b;
+			result *= result * b;
+			result *= result * b;
+			break;
+		case 8:
+			result *= result * b;
+			result *= result;
+			result *= result;
+			result *= result;
+			break;
+		case 9:
+			result *= result * b;
+			result *= result;
+			result *= result;
+			result *= result * b;
+			break;
+		case 10:
+			result *= result * b;
+			result *= result;
+			result *= result * b;
+			result *= result;
+			break;
+		case 11:
+			result *= result * b;
+			result *= result;
+			result *= result * b;
+			result *= result * b;
+			break;
+		case 12:
+			result *= result * b;
+			result *= result * b;
+			result *= result;
+			result *= result;
+			break;
+		case 13:
+			result *= result * b;
+			result *= result * b;
+			result *= result;
+			result *= result * b;
+			break;
+		case 14:
+			result *= result * b;
 			result *= result * b;
 			result *= result * b;
 			result *= result;
 			break;
 		default:
+			result *= result * b;
 			result *= result * b;
 			result *= result * b;
 			result *= result * b;
